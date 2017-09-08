@@ -1,0 +1,22 @@
+---
+title: "dplyr"
+output: html_document
+---
+
+#Filtering Columns and Rows
+
+When using dplyr, you can filter columns and rows by using select and filter. Let's look at an example using the Lahman baseball database. We first have to load the Lahman and dplyr packages.
+
+```{r message=FALSE, warning =FALSE}
+library(Lahman)
+library(dplyr)
+```
+
+Now suppose we would like to see the homerun totals for the 1927 New York Yankees. We could run the following code:
+
+```{r}
+Batting%>%
+  select(playerID,yearID,teamID,HR)%>%
+  filter(teamID=='NYA' & yearID==1927)
+```
+
