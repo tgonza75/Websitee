@@ -20,3 +20,28 @@ Batting%>%
   filter(teamID=='NYA' & yearID==1927)
 ```
 
+Now, we would like to see the instances where a player had more than 40 HR but less than 60 strikeouts (SO). We could run the following code:
+
+```{r}
+Batting%>%
+  select(playerID,yearID,teamID,HR,SO)%>%
+  filter(HR>40 & SO<60)
+```
+
+```{r message=FALSE, warning=FALSE}
+Batting%>%
+  select(playerID,yearID,teamID,HR)%>%
+  filter(HR>30 & teamID=='PHI' & yearID>=1970 & yearID<=1979)
+```
+```{r message=FALSE, warning=FALSE}
+Batting%>%
+  select(playerID,yearID,teamID,HR)%>%
+  filter(HR>50)%>%
+  arrange(desc(HR))
+```
+```{r message=FALSE, warning=FALSE}
+Batting%>%
+  select(playerID,yearID,teamID,AB,SO)%>%
+  filter(AB>=400 & SO<10)%>%
+  arrange(SO)
+
