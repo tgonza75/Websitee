@@ -48,9 +48,54 @@ Batting%>%
   arrange(desc(HR))
 ```
 
-Lastly, to find a player who has had at least 400 at-bats (AB), but has less than 10 strike outs strikes, we could run the following code... However let's have players with the smallest strikeout number at the top!
+To find a player who has had at least 400 at-bats (AB), but has less than 10 strike outs strikes, we could run the following code... However let's have players with the smallest strikeout number at the top!
 ```{r message=FALSE, warning=FALSE}
 Batting%>%
   select(playerID,yearID,teamID,AB,SO)%>%
   filter(AB>=400 & SO<10)%>%
   arrange(SO)
+```
+
+To see Babe Ruth's career HR we can use the following code:
+```{r}
+Batting%>%
+  filter(playerID=='ruthba01')%>%
+  group_by(playerID)%>%
+  summarize(career_HR=sum(HR))
+```
+
+To find the career HR totals for all players
+but limit the list to these who have a 
+career total of 600 or more. Put the highest
+totals at the top, run this code: 
+```{r}
+Batting%>%
+  group_by(playerID)%>%
+  summarize(career_HR=sum(HR))%>%
+  filter(career_HR>=600)%>%
+  arrange(desc(career_HR))
+```
+
+To find what players have the highest average per
+season HR totals run the following: 
+```{r}
+Batting%>%
+  group_by(playerID)%>%
+  summarize(avg_per_season_HR=mean(HR))%>%
+  filter(avg_per_season_HR>30)%>%
+  arrange(desc(avg_per_season_HR))
+```
+
+Lastly, to see what players since 1970 hit more than 50
+HRs at least once, dont list player more
+than once, run the following code:
+```{r}
+Batting%>%
+  filter(yearID>=1970)%>%
+  group_by(playerID)%>%
+  summarize(maxHR=max(HR))%>%
+  filter(maxHR>50)%>%
+  arrange(maxHR)%>%
+  select(playerID)
+```
+

@@ -248,7 +248,7 @@ library(dplyr)</code></pre>
 ## 34  mayswi01   1955    NY1 51
 ## 35 fieldce01   1990    DET 51
 ## 36 jonesan01   2005    ATL 51</code></pre>
-<p>Lastly, to find a player who has had at least 400 at-bats (AB), but has less than 10 strike outs strikes, we could run the following code… However let’s have players with the smallest strikeout number at the top!</p>
+<p>To find a player who has had at least 400 at-bats (AB), but has less than 10 strike outs strikes, we could run the following code… However let’s have players with the smallest strikeout number at the top!</p>
 <pre class="r"><code>Batting%&gt;%
   select(playerID,yearID,teamID,AB,SO)%&gt;%
   filter(AB&gt;=400 &amp; SO&lt;10)%&gt;%
@@ -319,6 +319,79 @@ library(dplyr)</code></pre>
 ## 63 holmeto01   1945    BSN 636  9
 ## 64 boudrlo01   1948    CLE 560  9
 ## 65 mitchda01   1952    CLE 511  9</code></pre>
+<p>To see Babe Ruth’s career HR we can use the following code:</p>
+<pre class="r"><code>Batting%&gt;%
+  filter(playerID=='ruthba01')%&gt;%
+  group_by(playerID)%&gt;%
+  summarize(career_HR=sum(HR))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   playerID career_HR
+##      &lt;chr&gt;     &lt;int&gt;
+## 1 ruthba01       714</code></pre>
+<p>To find the career HR totals for all players but limit the list to these who have a career total of 600 or more. Put the highest totals at the top, run this code:</p>
+<pre class="r"><code>Batting%&gt;%
+  group_by(playerID)%&gt;%
+  summarize(career_HR=sum(HR))%&gt;%
+  filter(career_HR&gt;=600)%&gt;%
+  arrange(desc(career_HR))</code></pre>
+<pre><code>## # A tibble: 8 x 2
+##    playerID career_HR
+##       &lt;chr&gt;     &lt;int&gt;
+## 1 bondsba01       762
+## 2 aaronha01       755
+## 3  ruthba01       714
+## 4 rodrial01       696
+## 5  mayswi01       660
+## 6 griffke02       630
+## 7 thomeji01       612
+## 8  sosasa01       609</code></pre>
+<p>To find what players have the highest average per season HR totals run the following:</p>
+<pre class="r"><code>Batting%&gt;%
+  group_by(playerID)%&gt;%
+  summarize(avg_per_season_HR=mean(HR))%&gt;%
+  filter(avg_per_season_HR&gt;30)%&gt;%
+  arrange(desc(avg_per_season_HR))</code></pre>
+<pre><code>## # A tibble: 13 x 2
+##     playerID avg_per_season_HR
+##        &lt;chr&gt;             &lt;dbl&gt;
+##  1 pujolal01          36.93750
+##  2 bondsba01          34.63636
+##  3 mcgwima01          34.29412
+##  4 kinerra01          33.54545
+##  5 aaronha01          32.82609
+##  6 bryankr01          32.50000
+##  7  ruthba01          32.45455
+##  8  sosasa01          32.05263
+##  9 cabremi01          31.85714
+## 10 belleal01          31.75000
+## 11 rodrial01          31.63636
+## 12 schmimi01          30.44444
+## 13 abreujo02          30.33333</code></pre>
+<p>Lastly, to see what players since 1970 hit more than 50 HRs at least once, dont list player more than once, run the following code:</p>
+<pre class="r"><code>Batting%&gt;%
+  filter(yearID&gt;=1970)%&gt;%
+  group_by(playerID)%&gt;%
+  summarize(maxHR=max(HR))%&gt;%
+  filter(maxHR&gt;50)%&gt;%
+  arrange(maxHR)%&gt;%
+  select(playerID)</code></pre>
+<pre><code>## # A tibble: 14 x 1
+##     playerID
+##        &lt;chr&gt;
+##  1 fieldce01
+##  2 jonesan01
+##  3 fostege01
+##  4 thomeji01
+##  5 davisch02
+##  6 bautijo02
+##  7 ortizda01
+##  8 griffke02
+##  9 gonzalu01
+## 10 rodrial01
+## 11 howarry01
+## 12  sosasa01
+## 13 mcgwima01
+## 14 bondsba01</code></pre>
 </div>
 
 
