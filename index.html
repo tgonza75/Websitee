@@ -120,8 +120,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="tiffany-gonzalez" class="section level2">
-<h2>Tiffany Gonzalez</h2>
+<div id="tiffany-gonzalez" class="section level4">
+<h4>Tiffany Gonzalez</h4>
 <p>Junior at Mercyhurst University. MS in Data Science | BA in Accounting</p>
 </div>
 <div id="filtering-columns-and-rows" class="section level1">
@@ -129,7 +129,7 @@ $(document).ready(function () {
 <p>When using dplyr, you can filter columns and rows by using select and filter. Let’s look at an example using the Lahman baseball database. We first have to load the Lahman and dplyr packages.</p>
 <pre class="r"><code>library(Lahman)
 library(dplyr)</code></pre>
-<p>To see the homerun totals for the 1927 New York Yankee we can run the following code:</p>
+<p>To see the homerun totals for each player on the 1927 New York Yankee baseball team, we can run the following code:</p>
 <pre class="r"><code>Batting%&gt;%
   select(playerID,yearID,teamID,HR)%&gt;%
   filter(teamID=='NYA' &amp; yearID==1927)</code></pre>
@@ -206,6 +206,10 @@ library(dplyr)</code></pre>
 ## 7 schmimi01   1977    PHI 38
 ## 8 luzingr01   1978    PHI 35
 ## 9 schmimi01   1979    PHI 45</code></pre>
+</div>
+<div id="arranging" class="section level1">
+<h1>Arranging</h1>
+<p>Next, we can work on arranging and/or sorting our data. To do so, we can use the “arrange” function, such as the following:</p>
 <p>To find every instance of a player hitting more than 50 HR’s we could run the following code… However let’s have the players with the most HR’s at the top!</p>
 <pre class="r"><code>Batting%&gt;%
   select(playerID,yearID,teamID,HR)%&gt;%
@@ -319,7 +323,11 @@ library(dplyr)</code></pre>
 ## 63 holmeto01   1945    BSN 636  9
 ## 64 boudrlo01   1948    CLE 560  9
 ## 65 mitchda01   1952    CLE 511  9</code></pre>
-<p>To see Babe Ruth’s career HR we can use the following code:</p>
+</div>
+<div id="aggregating" class="section level1">
+<h1>Aggregating</h1>
+<p>Finally, let’s work on aggregation… We can aggregate by using the “group_by” and “summarize” functions:</p>
+<p>Suppose you would like to know Babe Ruth’s career HR we can use the following code:</p>
 <pre class="r"><code>Batting%&gt;%
   filter(playerID=='ruthba01')%&gt;%
   group_by(playerID)%&gt;%

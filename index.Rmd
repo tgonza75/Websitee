@@ -3,7 +3,7 @@ title: "dplyr"
 output: html_document
 ---
 
-##Tiffany Gonzalez
+####Tiffany Gonzalez
 
 Junior at Mercyhurst University. 
 MS in Data Science | BA in Accounting 
@@ -17,7 +17,7 @@ library(Lahman)
 library(dplyr)
 ```
 
-To see the homerun totals for the 1927 New York Yankee we can run the following code:
+To see the homerun totals for each player on the 1927 New York Yankee baseball team, we can run the following code:
 
 ```{r}
 Batting%>%
@@ -40,6 +40,9 @@ Batting%>%
   filter(HR>30 & teamID=='PHI' & yearID>=1970 & yearID<=1979)
 ```
 
+#Arranging
+Next, we can work on arranging and/or sorting our data. To do so, we can use the "arrange" function, such as the following:
+
 To find every instance of a player hitting more than 50 HR's we could run the following code... However let's have the players with the most HR's at the top!
 ```{r message=FALSE, warning=FALSE}
 Batting%>%
@@ -56,7 +59,11 @@ Batting%>%
   arrange(SO)
 ```
 
-To see Babe Ruth's career HR we can use the following code:
+
+#Aggregating
+Finally, let's work on aggregation... We can aggregate by using the "group_by" and "summarize" functions:
+
+Suppose you would like to know Babe Ruth's career HR we can use the following code:
 ```{r}
 Batting%>%
   filter(playerID=='ruthba01')%>%
